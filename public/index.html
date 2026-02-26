@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Workspace</title>
+  <script src="/nav.js" defer></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+    .dashboard {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px 40px;
+    }
+    .dashboard h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .dashboard p {
+      color: #64748b;
+      margin-bottom: 32px;
+      font-size: 1.1rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+    .card h2 { font-size: 1.25rem; }
+    .card p {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1>My Workspace</h1>
+    <p>All your tools in one place.</p>
+    <div class="cards">
+      <a class="card" href="/files/">
+        <div class="card-icon">📁</div>
+        <h2>S3 File Manager</h2>
+        <p>Browse, upload, and manage files in your S3 bucket.</p>
+      </a>
+      <a class="card" href="/collab/">
+        <div class="card-icon">📝</div>
+        <h2>Collab Space</h2>
+        <p>Real-time collaborative document editing with live presence.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
