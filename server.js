@@ -3,7 +3,12 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+const FILES_TARGET = process.env.FILES_TARGET || "http://localhost:8080";
+const COLLAB_TARGET = process.env.COLLAB_TARGET || "http://localhost:4444";
+const COLLAB_WS_TARGET = process.env.COLLAB_WS_TARGET || "ws://localhost:4444";
+const COLLAB_FRONTEND_TARGET = process.env.COLLAB_FRONTEND_TARGET || "http://localhost:5173";
 
 // Serve static files (dashboard + nav.js)
 app.use(express.static(path.join(__dirname, "public")));
@@ -12,7 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   "/files",
   createProxyMiddleware({
-    target: "http://localhost:8080",
+    target: FILES_TARGET,
     pathRewrite: { "^/files": "" },
     changeOrigin: true,
   })
@@ -21,7 +26,7 @@ app.use(
 // Proxy /api/* → Collab server REST API on port 4444
 app.use(
   createProxyMiddleware({
-    target: "http://localhost:4444",
+    target: COLLAB_TARGET,
     changeOrigin: true,
     pathFilter: (path) => path.startsWith("/api"),
   })
@@ -30,7 +35,7 @@ app.use(
 // Proxy /ws/* → Yjs WebSocket server on port 4444 (MUST be before /collab to catch WS upgrades first)
 app.use(
   createProxyMiddleware({
-    target: "ws://localhost:4444",
+    target: COLLAB_WS_TARGET,
     pathRewrite: { "^/ws": "" },
     changeOrigin: true,
     ws: true,
@@ -38,10 +43,10 @@ app.use(
   })
 );
 
-// Proxy /collab/* → Vite dev server on port 5173 (keep /collab prefix, Vite expects it)
+// Proxy /collab/* → collab-space server (keep /collab prefix)
 app.use(
   createProxyMiddleware({
-    target: "http://localhost:5173",
+    target: COLLAB_FRONTEND_TARGET,
     changeOrigin: true,
     ws: true,
     pathFilter: (path) => path.startsWith("/collab"),
