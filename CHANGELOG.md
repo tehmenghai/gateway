@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-02-27
+
+### Added
+- Dockerfile for containerized deployment
+- Environment variable configuration for proxy targets (`FILES_TARGET`, `COLLAB_TARGET`, `COLLAB_WS_TARGET`, `COLLAB_FRONTEND_TARGET`)
+- Configurable `PORT` via environment variable
+
 ## [1.1.0] - 2026-02-26
 
 ### Added
