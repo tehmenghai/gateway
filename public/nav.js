@@ -9,7 +9,7 @@
     { href: "/collab/", label: "Collab" },
   ];
 
-  nav.innerHTML = links
+  const linksHtml = links
     .map((l) => {
       const active =
         l.href === "/"
@@ -18,6 +18,13 @@
       return `<a href="${l.href}" class="${active ? "active" : ""}">${l.label}</a>`;
     })
     .join("");
+
+  nav.innerHTML = `
+    <div class="nav-links">${linksHtml}</div>
+    <form method="POST" action="/logout" class="nav-logout">
+      <button type="submit">Logout</button>
+    </form>
+  `;
 
   const style = document.createElement("style");
   style.textContent = `
@@ -30,10 +37,29 @@
       background: #1a1a2e;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 0 16px;
-      gap: 4px;
       z-index: 99999;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-logout button {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #94a3b8;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-logout button:hover {
+      color: #e2e8f0;
+      border-color: rgba(255,255,255,0.4);
     }
     #platform-nav a {
       color: #94a3b8;

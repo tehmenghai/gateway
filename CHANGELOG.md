@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-03-01
+
+### Added
+- Session-cookie authentication (login wall) at gateway level
+- Login page (`/login`) with username/password form
+- Logout button in navigation bar
+- `/health` endpoint for ALB health checks (bypasses auth)
+- WebSocket upgrade handler with session auth check
+- New dependencies: `express-session`, `bcryptjs`, `cookie`
+
+### Changed
+- Server now uses `http.createServer()` for WebSocket upgrade interception
+- All routes (except `/health`, `/login`, `/logout`) require authentication
+- Static files served behind auth wall
+
 ## [1.2.0] - 2026-02-27
 
 ### Added
