@@ -45,18 +45,57 @@ Follow [Keep a Changelog](https://keepachangelog.com/). New entries go at the to
 
 ## Project Structure
 ```
-server.js       — Express gateway (reverse proxy for all platform services)
+server.js       — Express gateway (reverse proxy + auth enforcement)
+auth.js         — Auth middleware (session, requireAuth, password verify, WS auth)
 public/
   index.html    — Dashboard home page
-  nav.js        — Shared navigation bar (injected into all apps)
+  login.html    — Login page (self-contained, no nav bar)
+  nav.js        — Shared navigation bar with logout button
 package.json    — Dependencies + version (source of truth)
+Dockerfile      — Container build (node:20-slim, port 3000)
 CHANGELOG.md    — Release notes
 CLAUDE.md       — This file
 ```
 
-## Proxy Routes
+## Authentication
+
+Session-cookie auth at the gateway level. All routes require login except public routes.
+
+**Middleware order in server.js (critical — order matters):**
+1. `express.urlencoded()` — parse login form body
+2. `sessionMiddleware` — attach session to every request
+3. Public routes: `GET /health`, `GET /login`, `POST /login`, `POST /logout`
+4. `requireAuth` — auth wall, everything below is protected
+5. `express.static("public")` — dashboard + nav.js
+6. Proxy routes
+
+**Environment variables:**
+| Variable | Purpose | Required |
+|----------|---------|:---:|
+| `AUTH_USER` | Login username (default: `admin`) | No |
+| `AUTH_PASSWORD_HASH` | bcrypt hash of login password | Yes |
+| `SESSION_SECRET` | Cookie signing secret (default: `dev-secret-change-me`) | Yes (prod) |
+
+**Production secrets** are in SSM Parameter Store (`/my-work-space/AUTH_PASSWORD_HASH`, `/my-work-space/SESSION_SECRET`) — ECS injects them at startup.
+
+**Cookie settings:** `sid`, httpOnly, sameSite: lax, secure: false (ALB terminates TLS), 24h maxAge.
+
+**WebSocket auth:** `server.on("upgrade")` checks session cookie before proxying to backend.
+
+## Routes
+
+### Public (no auth)
+| Path | Method | Purpose |
+|------|--------|---------|
+| `/health` | GET | ALB health check |
+| `/login` | GET | Login page |
+| `/login` | POST | Verify credentials, create session |
+| `/logout` | POST | Destroy session, redirect to login |
+
+### Protected (require login)
 | Path | Target | Notes |
 |------|--------|-------|
+| `/` | Gateway static | Dashboard home page |
 | `/files/*` | `http://localhost:8080` | Strips `/files` prefix |
 | `/api/*` | `http://localhost:4444` | Collab server REST API |
 | `/ws/*` | `ws://localhost:4444` | Yjs WebSocket, strips `/ws` prefix |
