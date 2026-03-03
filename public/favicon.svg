@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+  <!-- Flame -->
+  <path d="M12 28 L16 22 L20 28 Q16 31 12 28Z" fill="#f97316"/>
+  <path d="M14 27 L16 23 L18 27 Q16 29 14 27Z" fill="#facc15"/>
+  <!-- Fins -->
+  <path d="M10 22 L7 26 L10 25 L12 20Z" fill="#1a1a2e"/>
+  <path d="M22 22 L25 26 L22 25 L20 20Z" fill="#1a1a2e"/>
+  <!-- Body -->
+  <path d="M11 22 L13 8 Q16 2 19 8 L21 22Z" fill="url(#body)" stroke="#1a1a2e" stroke-width="0.5"/>
+  <!-- Window -->
+  <circle cx="16" cy="13" r="3" fill="#1a1a2e"/>
+  <circle cx="16" cy="13" r="2" fill="#38bdf8"/>
+  <!-- Nose cone -->
+  <path d="M13 8 Q16 2 19 8" fill="#1a1a2e"/>
+</svg>

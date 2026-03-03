@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.1] - 2026-03-03
+
+### Added
+- Rocket ship favicon (SVG + ICO) for browser tabs
+- Public routes for `/favicon.ico` and `/favicon.svg` (served before auth wall)
+- `<link rel="icon">` tags in `login.html` and `index.html`
+
 ## [1.3.0] - 2026-03-01
 
 ### Added

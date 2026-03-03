@@ -51,6 +51,8 @@ public/
   index.html    — Dashboard home page
   login.html    — Login page (self-contained, no nav bar)
   nav.js        — Shared navigation bar with logout button
+  favicon.svg   — Rocket ship favicon (SVG, modern browsers)
+  favicon.ico   — Rocket ship favicon (ICO, legacy fallback)
 package.json    — Dependencies + version (source of truth)
 Dockerfile      — Container build (node:20-slim, port 3000)
 CHANGELOG.md    — Release notes
@@ -88,6 +90,8 @@ Session-cookie auth at the gateway level. All routes require login except public
 | Path | Method | Purpose |
 |------|--------|---------|
 | `/health` | GET | ALB health check |
+| `/favicon.ico` | GET | Favicon (ICO) |
+| `/favicon.svg` | GET | Favicon (SVG) |
 | `/login` | GET | Login page |
 | `/login` | POST | Verify credentials, create session |
 | `/logout` | POST | Destroy session, redirect to login |
