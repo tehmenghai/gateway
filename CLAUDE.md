@@ -53,6 +53,7 @@ public/
   nav.js        — Shared navigation bar with logout button
   favicon.svg   — Rocket ship favicon (SVG, modern browsers)
   favicon.ico   — Rocket ship favicon (ICO, legacy fallback)
+  apple-touch-icon.png — 180x180 icon for iOS home screen
 package.json    — Dependencies + version (source of truth)
 Dockerfile      — Container build (node:20-slim, port 3000)
 CHANGELOG.md    — Release notes
@@ -92,6 +93,7 @@ Session-cookie auth at the gateway level. All routes require login except public
 | `/health` | GET | ALB health check |
 | `/favicon.ico` | GET | Favicon (ICO) |
 | `/favicon.svg` | GET | Favicon (SVG) |
+| `/apple-touch-icon.png` | GET | iOS home screen icon |
 | `/login` | GET | Login page |
 | `/login` | POST | Verify credentials, create session |
 | `/logout` | POST | Destroy session, redirect to login |

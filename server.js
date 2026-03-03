@@ -52,6 +52,7 @@ app.post("/logout", (req, res) => {
 // Serve favicon publicly (before auth wall)
 app.get("/favicon.ico", (req, res) => res.sendFile(path.join(__dirname, "public", "favicon.ico")));
 app.get("/favicon.svg", (req, res) => res.sendFile(path.join(__dirname, "public", "favicon.svg")));
+app.get("/apple-touch-icon.png", (req, res) => res.sendFile(path.join(__dirname, "public", "apple-touch-icon.png")));
 
 // --- Auth wall — everything below requires login ---
 app.use(requireAuth);

@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.2] - 2026-03-03
+
+### Fixed
+- Redesigned favicon with dark background for visibility in browser tabs
+- Added `apple-touch-icon.png` (180x180) for iOS home screen / web app icon
+- Public route for `/apple-touch-icon.png` (served before auth wall)
+
 ## [1.3.1] - 2026-03-03
 
 ### Added
