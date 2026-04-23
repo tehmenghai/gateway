@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] - 2026-04-23
+
+### Added
+- Protected `/apps/` proxy route for the HTML Apps admin service
+- HTML Apps dashboard card and shared navigation link
+- Configurable `APPS_TARGET` environment variable
+
 ## [1.3.2] - 2026-03-03
 
 ### Fixed

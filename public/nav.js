@@ -7,6 +7,7 @@
     { href: "/", label: "Home" },
     { href: "/files/", label: "Files" },
     { href: "/collab/", label: "Collab" },
+    { href: "/apps/", label: "Apps" },
   ];
 
   const linksHtml = links

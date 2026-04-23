@@ -13,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const FILES_TARGET = process.env.FILES_TARGET || "http://localhost:8080";
+const APPS_TARGET = process.env.APPS_TARGET || "http://localhost:9090";
 const COLLAB_TARGET = process.env.COLLAB_TARGET || "http://localhost:4444";
 const COLLAB_WS_TARGET = process.env.COLLAB_WS_TARGET || "ws://localhost:4444";
 const COLLAB_FRONTEND_TARGET = process.env.COLLAB_FRONTEND_TARGET || "http://localhost:5173";
@@ -66,6 +67,16 @@ app.use(
   createProxyMiddleware({
     target: FILES_TARGET,
     pathRewrite: { "^/files": "" },
+    changeOrigin: true,
+  })
+);
+
+// Proxy /apps/* -> html-apps admin service on port 9090 (strip /apps prefix)
+app.use(
+  "/apps",
+  createProxyMiddleware({
+    target: APPS_TARGET,
+    pathRewrite: { "^/apps": "" },
     changeOrigin: true,
   })
 );
